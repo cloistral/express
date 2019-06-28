@@ -9,7 +9,11 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use('/index.html',express.static(path.join(__dirname, 'public')));
-app.use('/', router);
 
+app.use('/public', express.static('public'));
+router.get('/index.html',(req,res) => {
+    res.sendFile( __dirname + "/public/" + "index.html" );
+})
+
+app.use('/', router);
 module.exports = app;
