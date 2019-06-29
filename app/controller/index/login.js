@@ -11,7 +11,8 @@ module.exports = (req,res) => {
     var config = res.app.get('config')
     var authToken = jwt.sign({
         username: username,
-        password:password
+        password:password,
+        uid : '123456'
     }, config.secret,{
         expiresIn : config.expiresIn
     });
