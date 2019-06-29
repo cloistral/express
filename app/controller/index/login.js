@@ -1,10 +1,11 @@
 var jwt = require("jsonwebtoken");
 module.exports = (req,res) => {
-    var username = req.body.username;
-    var password = req.body.password;
-    
-    if (!username||!password) {
-        return res.status(400).send("输入username及password");
+    var format = res.app.get('format')
+    var username = req.query.username;
+    var password = req.query.password;
+    if (!username || !password) {
+      format.fail(res,500,'请求失败,请输入用户名及密码!')
+      return;
     }
     // 加密，获取token
     var config = res.app.get('config')
