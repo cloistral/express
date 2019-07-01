@@ -16,7 +16,6 @@ router.use(function (err, req, res, next) {
     }
 });
 
-
 var indexCon = require('../app/controller/index/index')
 router.get('/',indexCon.index)
 
@@ -25,7 +24,5 @@ router.post('/getUserInfo', userCon.getUserInfo);
 
 var loginCon = require('../app/controller/index/login')
 router.get('/login', loginCon);
-
-
 
 module.exports = router;

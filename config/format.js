@@ -4,6 +4,7 @@ module.exports = {
         data = data || {}
         msg = msg || 'success'
         res.status(code).send({code:code,msg:msg,data:data})
+        return;
     },
     fail (res,code,reason) {
         code = code || 500
