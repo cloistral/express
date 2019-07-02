@@ -14,4 +14,5 @@ var docSchema = new mongoose.Schema({
     }
 })
 var docModel = mongoose.model("user", docSchema);
+// docModel.methods.
 module.exports = docModel;
