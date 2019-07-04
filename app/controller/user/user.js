@@ -1,11 +1,9 @@
-
-var User = require('../../model/user.model')
+var User = require('../../model/userInfo.model') 
 module.exports = {
     getUserInfo(req,res,next){
-        User.find().then((data) => {
-            console.log(data)
+        var format = res.app.get('format')
+        User.find({username:'fsd'}).then((data) => {
+            format.success(res,200,data)
         })
-        console.log(req.user)
-        res.json(req.user);
     }
 }

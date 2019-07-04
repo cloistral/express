@@ -22,7 +22,7 @@ router.get('/',indexCon.index)
 var userCon = require('../app/controller/user/user')
 router.post('/getUserInfo', userCon.getUserInfo);
 
-var loginCon = require('../app/controller/index/login')
+var loginCon = require('../app/controller/user/login')
 router.get('/login', loginCon);
 
 module.exports = router;

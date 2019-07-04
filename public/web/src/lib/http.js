@@ -4,7 +4,6 @@ const Axios = axios.create({timeout: 10000})
 Axios.interceptors.request.use(config => {
     if (localStorage.token) {   
         config.headers.Authorization = 'Bearer ' + localStorage.token
-        console.log(config.headers.Authorization)
     }
     return config
 },error =>{

@@ -4,15 +4,18 @@ var docSchema = new mongoose.Schema({
         type : mongoose.Schema.Types.ObjectId,
         index : true
     },
-    usernmae : {
+    name : {
         type : String,
         index : true
     },
-    password : {
+    age : {
+        type : String,
+        index : true
+    },
+    duty : {
         type : String,
         index : true
     }
 })
-var docModel = mongoose.model("user", docSchema);
-// docModel.methods.
+var docModel = mongoose.model("site", docSchema);
 module.exports = docModel;
