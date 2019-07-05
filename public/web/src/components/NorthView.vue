@@ -8,16 +8,15 @@
 export default {
     data() {
         return {
-            transitionName : '',
+            transitionName : 'slide-right',
         }
     },
     watch : {
         $route (to,from) {
-            if(to.path.length > from.path.length) {
-                this.transitionName = 'slide-right'
-            }else {
-                this.transitionName = 'slide-left'
-            }
+            console.log(this.$router)
+            const toDepth = to.path
+            const fromDepth = from.path
+            this.transitionName = toDepth < fromDepth?'slide-right':'slide-left'
         },
         '$router.push' () {
             console.log(1111)
@@ -33,11 +32,13 @@ export default {
     position: absolute;
     width : 100vw;
     height : 100vh;
+    box-sizing: border-box;
     overflow : auto;
     font-size : 20px;
     color : #2c3e50;
     background-color : #f5f5f5;
     overflow: hidden auto;
+    padding-top: 44px;
 }
 
 .slide-left-enter-active { animation: left-in .5s}

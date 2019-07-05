@@ -1,6 +1,6 @@
 <template>
-    <div class="north-page bg">
-
+    <div class="north-page">
+        <north-header title="">
     </div>
 </template>
 

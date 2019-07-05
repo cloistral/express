@@ -1,5 +1,6 @@
 <template>
     <div>
+        <north-header/>
         <!-- <div v-for="(item,index) in usersList" :key="index">
             <span v-text="item.username" class="test"></span>
             <span v-text="item.date"></span>

@@ -1,18 +1,18 @@
 <template>
     <div class="north-header">
-        <div class="left" @click="$router.back()">
-            <img src="../assets/back.png">
+        <div class="left" @click="$router.go(-1)">
+            <img src="../assets/back_white.png" width="25">
         </div>
-        <div class="middle">首页</div>
-        <div class="right"></div>
+        <div class="middle" v-text="title"></div>
+        <div class="right">
+            <slot name="right"></slot>
+        </div>
     </div>
 </template>
 
 <script>
 export default {
-    methods : {
-       
-    }
+   props : ['title']
 }
 </script>
 
@@ -27,11 +27,13 @@ export default {
    height: 44px;
    box-sizing: border-box;
    padding: 0 2.5%;
+   background-color: #000000;
+   color: #fff;
    display: flex;
    align-items: center;
    justify-content: center;
 }
-.north-header .left {flex: 1}
+.north-header .left {flex: 1;}
 .north-header .middle {flex: 2;display: inline-flex;align-items: center;justify-content: center}
 .north-header .right {flex: 1}
 

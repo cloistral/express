@@ -1,13 +1,11 @@
 <template>
   <div id="app">
-     <north-header />
      <north-view />
   </div>
 </template>
 
 <script>
 import NorthView from '@/components/NorthView'
-import NorthHeader from '@/components/NorthHeader'
 export default {
     name: 'app',
     data() {
@@ -15,7 +13,6 @@ export default {
     },
     components : {
       'north-view' : NorthView,
-      'north-header' : NorthHeader
     }
 }
 </script>
