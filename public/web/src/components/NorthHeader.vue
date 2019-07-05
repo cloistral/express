@@ -1,6 +1,6 @@
 <template>
     <div class="north-header">
-        <div class="left" @click="$router.go(-1)">
+        <div class="left" @click="$router.prev()">
             <img src="../assets/back_white.png" width="25">
         </div>
         <div class="middle" v-text="title"></div>
@@ -20,7 +20,7 @@ export default {
 
 .north-header {
    position: fixed;
-   z-index: 99;
+   z-index: 9;
    top: 0;
    left: 0;
    width: 100%;

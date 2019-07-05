@@ -9,7 +9,7 @@ export default {
     },
     mounted () {
        let time = setTimeout(() => {
-           this.$router.push({path:'/user'})
+           this.$router.forward({path:'/user'})
            clearTimeout(time)
        },1000)
     },

@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import { setTimeout, clearTimeout } from 'timers';
 export default {
     data() {
         return {
@@ -13,13 +14,18 @@ export default {
     },
     watch : {
         $route (to,from) {
-            console.log(this.$router)
-            const toDepth = to.path
-            const fromDepth = from.path
-            this.transitionName = toDepth < fromDepth?'slide-right':'slide-left'
-        },
-        '$router.push' () {
-            console.log(1111)
+            if(this.$router.method == 'push') {
+                this.transitionName = 'slide-left'
+            }else {
+                this.transitionName = 'slide-right'
+            }
+            let time = setTimeout(() => {
+                this.$router.method = null
+                clearTimeout(time)
+            },5)
+            // const toDepth = to.path
+            // const fromDepth = from.path
+            // this.transitionName = toDepth < fromDepth?'slide-right':'slide-left'
         }
     }
 }
@@ -33,7 +39,7 @@ export default {
     width : 100vw;
     height : 100vh;
     box-sizing: border-box;
-    overflow : auto;
+    overflow : hidden auto;
     font-size : 20px;
     color : #2c3e50;
     background-color : #f5f5f5;
