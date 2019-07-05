@@ -32,6 +32,7 @@ export default {
    display: flex;
    align-items: center;
    justify-content: center;
+   font-size: 18px;
 }
 .north-header .left {flex: 1;}
 .north-header .middle {flex: 2;display: inline-flex;align-items: center;justify-content: center}
