@@ -9,6 +9,8 @@ Vue.use(http)
 import NorthHeader from '@/components/NorthHeader'
 Vue.component('north-header',NorthHeader)
 
+import './services/modal/index'
+
 Vue.config.productionTip = false
 new Vue({
   router,

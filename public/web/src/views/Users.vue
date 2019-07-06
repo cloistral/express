@@ -5,11 +5,12 @@
             <span v-text="item.username" class="test"></span>
             <span v-text="item.date"></span>
         </div> -->
-        <cube-button class="button" @click="$router.forward({path:'/mine'})">Button</cube-button>
+        <cube-button class="button" @click="btnClick">Button</cube-button>
     </div>
 </template>
 
 <script>
+import NorthHeader from '../components/NorthHeader'
 export default {
     data() {
         return {
@@ -17,6 +18,7 @@ export default {
         }
     },
     mounted () {
+   
         return
         this.$http.post('/api/getUserInfo')
             .then(res => {
@@ -24,6 +26,17 @@ export default {
             }).catch(err => {
 
             })   
+    },
+    methods : {
+        btnClick() {
+            // $router.forward({path:'/mine'})
+            $modal.createComponent('',{
+                title:'Modal'
+            })
+              .then(modal => {
+                 modal.show()
+              }) 
+        }
     }
 }
 </script>
