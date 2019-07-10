@@ -1,6 +1,6 @@
 <template>
     <transition name="slide" @click.stop>
-        <div id="modal" class="north-modal-page" v-show="state === 1">
+        <div id="north-modal" class="north-modal-page" v-show="state === 1">
             <div class="north-modal-header">
                 <div class="left" @click="hide()">
                     <img src="../../assets/back_white.png" width="25">
@@ -22,7 +22,7 @@ export default {
     props : {
         options : {
             type : Object,
-            default : null
+            default : null,
         }
     },
     name : 'Modal',
