@@ -1,11 +1,11 @@
 <template>
     <transition name="slide" @click.stop>
-        <div id="north-modal" class="north-modal-page" v-show="state === 1">
+        <div id="north-modal" class="north-modal-page" v-if="state === 1">
             <div class="north-modal-header">
                 <div class="left" @click="hide()">
                     <img src="../../assets/back_white.png" width="25">
                 </div>
-                <div class="middle" v-text="options.title"></div>
+                <div class="middle">createApi</div>
                 <div class="right">
                     <slot name="right"></slot>
                 </div>
@@ -16,34 +16,25 @@
 </template>
 
 <script>
-  const show_modal_animate_dur = 400
-  const hide_modal_animate_dur = 250
 export default {
+    name : 'Modal',
     props : {
         options : {
             type : Object,
             default : null,
         }
     },
-    name : 'Modal',
     data () {
         return { 
             state : 0 
         }
     },
+    mounted () {
+        console.log(this.$http)
+    },
     methods : {
-        show() {
-           let time = setTimeout(() => {
-                this.state = 1
-                clearTimeout(time)
-           },show_modal_animate_dur);
-        },
-        hide() {
-            let time = setTimeout(() => {
-                this.state = 0
-                clearTimeout(time)
-           },hide_modal_animate_dur);
-        }
+        show() { this.state = 1 },
+        hide() { this.state = 0 }
     }
 }
 </script>
@@ -51,7 +42,7 @@ export default {
 
 <style lang="stylus" scoped>
 .north-modal-page {
-    position: fixed;
+    position: absolute;
     z-index: 10;
     top: 0;
     left: 0;

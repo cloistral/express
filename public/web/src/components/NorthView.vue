@@ -31,7 +31,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="stylus">
 
 
 .north-page {
@@ -45,6 +45,7 @@ export default {
     background-color : #f5f5f5;
     overflow: hidden auto;
     padding-top: 44px;
+    font-size: $base-font-size;
 }
 
 .slide-left-enter-active { animation: left-in .5s}

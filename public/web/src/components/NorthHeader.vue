@@ -16,7 +16,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="stylus">
 
 .north-header {
    position: fixed;
@@ -26,17 +26,17 @@ export default {
    width: 100%;
    height: 44px;
    box-sizing: border-box;
-   padding: 0 2.5%;
+   padding: 0 5%;
    background-color: #000000;
    color: #fff;
    display: flex;
    align-items: center;
    justify-content: center;
-   font-size: 18px;
+   font-size: $large-font-size ;
 }
 .north-header .left {flex: 1;}
 .north-header .middle {flex: 2;display: inline-flex;align-items: center;justify-content: center}
-.north-header .right {flex: 1}
+.north-header .right {flex: 1;display: flex;justify-content: flex-end;font-size: 16px}
 
 
 

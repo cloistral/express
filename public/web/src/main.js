@@ -4,14 +4,18 @@ import App from './App.vue'
 import router from './router/index'
 import 'amfe-flexible'
 import http from './lib/http'
-
+Vue.use(http)
 import NorthHeader from '@/components/NorthHeader'
-Vue.component('north-header',NorthHeader)
+Vue.component('north-header', NorthHeader)
 
-import './services/modal/index'
+import Modal from './services/modal/Modal'
+
+import createAPI from './services/create/index'
+createAPI(Vue, Modal, ['click'], true)
+
 
 Vue.config.productionTip = false
 new Vue({
-  router,
-  render: h => h(App),
+	router,
+	render: (h) => h(App)
 }).$mount('#app')
