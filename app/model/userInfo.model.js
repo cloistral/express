@@ -1,23 +1,25 @@
 var mongoose = require("mongoose");
 var docSchema = new mongoose.Schema({
-    username : {
-        type : String,
-        index : true
+    username: {
+        type: String,
+        required: [true, '']
     },
-    password : {
-        type : String,
-        index : true
+    password: {
+        type: String,
+        required: [true, '']
     },
-    date : {
-        type : Date,
+    birthday: {
+        type: String,
+        required: function () {
+            return [true, ''];
+        }
     },
-    age : {
-        type : String,
-    },
-    constellation : {
-        type : String,
+    address: {
+        type: String,
+        required : true
+       
     }
 })
 var docModel = mongoose.model("user_info", docSchema);
-// docModel.methods.
+
 module.exports = docModel;

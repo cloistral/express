@@ -4,10 +4,12 @@ import TreeIndex from '@/views/tree/TreeIndex'
 import TreeChild from '@/views/tree/TreeChild'
 import TreeSecond from '@/views/tree/TreeSecond'
 import Mine from "@/views/Mine"
+import Login from '@/views/Login'
 const routes = [
     { path: '/a', redirect: '/index' },
     { path : '/index',component : Index,},
     { path : '/user',component : User},
+    { path : '/login',component : Login},
     {
         path : '/treeIndex',
         component : TreeIndex,

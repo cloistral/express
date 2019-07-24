@@ -11,5 +11,17 @@ module.exports = {
         reason = reason || '请求失败'
         res.status(code).send({code:code,msg:reason})
         return ;
+    },
+    error (res,reason) {
+        let code = 400 //数据库字段验证
+        reason = reason || '请求失败'
+        let list = []
+        for (const key in reason) {
+            if (reason.hasOwnProperty(key)) {
+                const element = reason[key]; 
+                list.push(element.message)
+            }
+        }
+        res.status(code).send({code:code,msg:list})
     }
 }
