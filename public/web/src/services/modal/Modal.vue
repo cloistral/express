@@ -117,8 +117,7 @@ export default {
         align-items: center;
         justify-content: center;
 
-        .left {
-        }
+        .left {}
 
         .middle {
             flex: 1;
@@ -126,9 +125,7 @@ export default {
             align-items: center;
             justify-content: center;
         }
-
-        .right {
-        }
+        .right {}
     }
 
     .north-modal-content {
