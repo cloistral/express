@@ -2,7 +2,9 @@
     <div class="index-bg">
         <div class="center-text">
             <cube-button class="button"
-                         @click="btnClick">Button</cube-button>
+                         @click="btnClick(1)">1</cube-button>
+             <cube-button class="button"
+                         @click="btnClick(2)">2</cube-button>             
             <cube-button class="button"
                          @click="$router.forward({ path: '/treeIndex' })">Button</cube-button>
             <!-- <div v-for="(item,index) in dataTextList" :key="index" ref="textRefs">
@@ -13,10 +15,13 @@
 </template>
 
 <script>
+import Test from '../components/modal/Test'
+import Options from '../components/modal/Options'
 export default {
     data() {
         return {
-            modal: null,
+            modal1: null,
+            modal2 : null,
             dataTextList: [
                 '我怕实现模糊了,',
                 '看不清你的样子。',
@@ -31,7 +36,18 @@ export default {
         }
     },
     mounted() {
-        this.modal = this.$createModal({})
+        this.modal1 = this.$createModal({
+            title:'111',
+            component:Test,
+            rightBtn : {
+                title : '了解',
+                icon : '',
+                callback : () => {
+                    console.log(22222)
+                }
+            }
+        })
+        this.modal2 = this.$createModal({component:Options,isMount:false})
         this.$nextTick(() => {
             anime({
                 targets: this.$refs.textRefs,
@@ -52,14 +68,13 @@ export default {
         })
     },
     destroy() {
-        this.modal.remove()
+        // this.modal1.remove()
     },
     methods: {
-        btnClick() {
-            this.modal.show()
-            this.modal.$on('click',(e) => {
-               
-            })
+        btnClick(par) {
+            console.log(par)
+            let ref = 'modal' + par
+            this[ref].show()
         }
     }
 }

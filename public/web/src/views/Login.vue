@@ -40,15 +40,6 @@ export default {
     destroy () {},
     methods: {
         submit() {
-            // if (!this.param.username && !this.param.password) {
-            //     const toast = this.$createToast({
-            //         time: 1000,
-            //         type: 'txt',
-            //         txt: '请输入用户名和密码'
-            //     })
-            //     toast.show()
-            //     return
-            // }
             this.$http.post('/api/login', this.param).then((res) => {
                 if (res.code == 200) {
                     localStorage.token = res.data.token

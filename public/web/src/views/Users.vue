@@ -1,17 +1,24 @@
 <template>
     <div>
         <north-header title="用户" />
-        <div class="list-container">
-            <div class="section"
-                 v-for="(item,index) in usersList"
-                 :key="index">
-                <span v-text="'用户名:' + item.username"
-                      class="test"></span>
-                <span v-text="'密码:' + item.password"></span>
-            </div>
+        <div class="scroll-list-wrap">
+            <cube-scroll ref="scroll"
+                         :data="usersList"
+                         :options="options"
+                         @pulling-down="onPullingDown"
+                         @pulling-up="onPullingUp">
+                <div class="list-container">
+                    <div class="section"
+                         v-for="(item,index) in usersList"
+                         :key="index">
+                        <div v-text="'用户名:' + item.username"
+                              class="test"></div>
+                        <div v-text="'密码:' + item.password"></div>
+                        <div v-text="'生日:' + item.birthdaty"></div>
+                    </div>
+                </div>
+            </cube-scroll>
         </div>
-        <cube-button class="button"
-                     @click="btnClick">Button</cube-button>
     </div>
 </template>
 
@@ -20,41 +27,67 @@ import NorthHeader from '../components/NorthHeader'
 export default {
     data() {
         return {
-            usersList: []
+            usersList: [],
+            param : {
+                pageSize : 0,
+                pageCount : 5
+            }
         }
     },
     mounted() {
-        this.$http
-            .post('/api/getUserInfo')
-            .then((res) => {
-                this.usersList = res.data
-            })
-            .catch((err) => { })
+        this.init()
+    },
+    computed: {
+        options() {
+            return {
+                pullDownRefresh: true,
+                pullUpLoad: true,
+                scrollbar: true
+            }
+        },
     },
     methods: {
-        btnClick() {
-            let instance = this.$createModal()
-            instance.show()
-        }
+        init(page) {
+            this.param.pageSize = page || this.param.pageSize
+            this.$http
+            .post('/api/getUserInfo',this.param)
+            .then((res) => {
+                this.param.pageSize++
+                this.usersList = this.usersList.concat(res.data.list) 
+            })
+        },
+        onPullingDown() {
+            this.init()
+        },
+        onPullingUp() {
+            this.init()
+        },
     }
 }
 </script>
 
 <style lang="stylus">
+.scroll-list-wrap {
+    width 100%;
+    height : calc(100% - 44Px);
+    position absolute;
+    top :  44px;
+}
 .list-container {
     width: 95%;
     margin: auto;
-    display : flex;
-    flex-direction : column ;
-    align-items : center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
     .section {
         width: 100%;
-        margin 10px 0;
+        margin: 10px 0;
         display: flex;
+        flex-direction column;
         justify-content: space-between;
-        align-items: center;
-        span {
-            flex: 1;
+        div {
+            margin : 10px 0
         }
     }
 }

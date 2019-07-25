@@ -9,19 +9,19 @@ module.exports = {
     fail (res,code,reason) {
         code = code || 500
         reason = reason || '请求失败'
-        res.status(code).send({code:code,msg:reason})
+        res.status(code).send({code:code,msg:reason,data:{}})
         return ;
     },
     error (res,reason) {
-        let code = 400 //数据库字段验证
+        let code = 500
         reason = reason || '请求失败'
-        let list = []
+        let msgStr = ''
         for (const key in reason) {
             if (reason.hasOwnProperty(key)) {
                 const element = reason[key]; 
-                list.push(element.message)
+                msgStr += element.message
             }
         }
-        res.status(code).send({code:code,msg:list})
+        res.status(code).send({code:code,msg:'请求失败,请查看原因',data:reason})
     }
 }

@@ -4,11 +4,7 @@ var config = require('../config/config')
 var router = express.Router();
 
 //配置JST
-router.use(expressJwt({
-    secret: config.secret
-}).unless({
-    path: ["/api/login",'/index.html']
-}),);
+router.use(expressJwt({ secret: config.secret }).unless({ path: ["/api/login",'/index.html']}));
 
 router.use(function (err, req, res, next) {
     if (err.name === 'UnauthorizedError') {   
@@ -21,6 +17,7 @@ router.get('/',indexCon.index)
 
 var userCon = require('../app/controller/user/user')
 router.post('/getUserInfo', userCon.getUserInfo);
+router.get('/getCurrentUser', userCon.getCurrentUser);
 
 var loginCon = require('../app/controller/user/login')
 router.post('/login', loginCon);

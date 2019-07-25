@@ -36,6 +36,8 @@ Axios.interceptors.response.use(response => {
         // 401 说明 token 验证失败
     }else if(response.status === 500) {
         initToast(response.data.msg)   
+    }else if(response.status === 400) {
+        initToast(response.data.msg)
     }
     return Promise.reject(response.data); 
 })

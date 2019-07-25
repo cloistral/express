@@ -11,7 +11,7 @@ Vue.component('north-header', NorthHeader)
 import Modal from './services/modal/Modal'
 
 import createAPI from './services/create/index'
-createAPI(Vue, Modal, ['click'], true)
+createAPI(Vue, Modal, ['click'], false)
 
 
 Vue.config.productionTip = false
