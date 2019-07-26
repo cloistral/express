@@ -52,7 +52,7 @@ export default {
     },
     methods: {
         backClick() {
-            if (this.backType == 'page') this.$router.pre()
+            if (this.backType == 'page') this.$router.prev()
             else if (this.backType == 'modal') this.$parent.$parent.hide()
         }
     }

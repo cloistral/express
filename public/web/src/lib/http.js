@@ -28,7 +28,6 @@ Axios.interceptors.request.use(config => {
 
 
 Axios.interceptors.response.use(response => {
-    console.log('aaaaaaaaa',response)
     return response.data
 }, error => {
     let response = error.response

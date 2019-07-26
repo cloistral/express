@@ -29,15 +29,13 @@ export default {
 	z-index: 99;
 	top: 0;
 	left: 0;
-	width: 100vw;
-	height: 100vh;
+	width: 100%;
+	height: 100%;
 	box-sizing: border-box;
-	overflow: auto;
 	font-size: 20px;
 	color: #2c3e50;
 	background-color: #f5f5f5;
-	overflow: hidden auto;
-	padding-top: 44px;
+    overflow: hidden auto;
 }
 
 .slide-enter-active {

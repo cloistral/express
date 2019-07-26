@@ -3,13 +3,8 @@
         <div class="center-text">
             <cube-button class="button"
                          @click="btnClick(1)">1</cube-button>
-             <cube-button class="button"
-                         @click="btnClick(2)">2</cube-button>             
             <cube-button class="button"
-                         @click="$router.forward({ path: '/treeIndex' })">Button</cube-button>
-            <!-- <div v-for="(item,index) in dataTextList" :key="index" ref="textRefs">
-        <span v-text="item"></span>
-      </div> -->
+                         @click="$router.forward({ path: '/login' })">Button</cube-button>
         </div>
     </div>
 </template>
@@ -21,7 +16,6 @@ export default {
     data() {
         return {
             modal1: null,
-            modal2 : null,
             dataTextList: [
                 '我怕实现模糊了,',
                 '看不清你的样子。',
@@ -37,17 +31,10 @@ export default {
     },
     mounted() {
         this.modal1 = this.$createModal({
-            title:'111',
-            component:Test,
-            rightBtn : {
-                title : '了解',
-                icon : '',
-                callback : () => {
-                    console.log(22222)
-                }
-            }
+            title: '111',
+            component: Test,
         })
-        this.modal2 = this.$createModal({component:Options,isMount:false})
+
         this.$nextTick(() => {
             anime({
                 targets: this.$refs.textRefs,
@@ -60,7 +47,6 @@ export default {
                 delay: anime.stagger(1000),
                 complete: () => {
                     let time = setTimeout(() => {
-                        // this.$router.forward({ path: '/treeIndex' })
                         clearTimeout(time)
                     }, 1000)
                 }
@@ -72,9 +58,7 @@ export default {
     },
     methods: {
         btnClick(par) {
-            console.log(par)
-            let ref = 'modal' + par
-            this[ref].show()
+            this.modal1.show()
         }
     }
 }
@@ -88,7 +72,6 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
     .center-text {
         width: 60vw;
         height: 60vh;

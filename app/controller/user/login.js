@@ -1,6 +1,6 @@
 var jwt = require("jsonwebtoken");
-var assert = require('assert')
-var User = require('../../model/userInfo.model')
+var User = require('../../model/user.model')
+var Story = require('../../model/stoty.modal')
 module.exports = (req, res) => {
     var format = res.app.get('format')
     var config = res.app.get('config')
@@ -15,15 +15,22 @@ module.exports = (req, res) => {
         })
     let createUser = function () {
         var user = new User({
+            
             username: req.body.username,
             password: req.body.password,
-            birthday: req.body.birthday
         })
         user.save(function (error) {
-            
             if(error) {
                 return format.error(res,error.errors)
             }
+            let title = 'north_1'
+            let story = new Story({
+                title : title,
+                author : user._id
+            })
+            story.save((err,d)  => {
+                console.log(d)
+            })
             var authToken = jwt.sign({
                 username: req.body.username,
                 password: req.body.password,

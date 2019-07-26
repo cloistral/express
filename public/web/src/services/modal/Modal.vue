@@ -16,25 +16,11 @@ import Vue from 'vue'
 export default {
     name: 'Modal',
     props: {
-        options: {
-            type: Object,
-            default() { return {} }
-        },
         component: {
             //传递过来的组件
             type: Object,
             default: null
         },
-        isMount: {
-            //是否需要刷新
-            type: Boolean,
-            default: true
-        },
-        title: {
-            type: String,
-            default: 'Modal'
-        },
-
     },
     data() {
         return {
@@ -45,11 +31,6 @@ export default {
     },
     mounted() {
         this.initPlaceComponent()
-        if (!this.isMount) {
-            //如果不需要刷新那么就简单的创建页面就可以了
-            this.mountComponent()
-        }
-        console.log(this.$slots)
     },
     methods: {
         //创建占位标签
@@ -59,13 +40,14 @@ export default {
             place.setAttribute('id', this.id)
             parent.appendChild(place)
         },
-        mountComponent() {
+        mountComponent(options) {
+            console.log(options)
             if (!this.component) return;
             this.$nextTick(() => {
                 let Instance = Vue.extend(this.component)
                 let target = document.querySelector('#' + this.id)
                 this.instance = new Instance({
-                    propsData: this.options
+                    propsData: { options : options }
                 }).$mount(target)
                 this.instance.$parent = this //将子组件的$parent属性指向自己
                 this.instance.$on('back', (res) => {
@@ -83,14 +65,13 @@ export default {
                 this.initPlaceComponent()
             })
         },
-        show() {
+        showModal(options) {
             this.isShow = true
-            if (this.isMount) this.mountComponent() //手动刷新组件
-
+            this.mountComponent(options)
         },
         hide() {
             this.isShow = false
-            if (this.isMount) this.destroyComponent() //手动移除组件
+            this.destroyComponent()
         }
     },
     destroy() {
@@ -108,8 +89,8 @@ export default {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: #888;
-
+    background-color: #f5f5f5;
+    font-size: $base-font-size;
     .north-modal-header {
         width: 100%;
         height: 44px;
@@ -117,7 +98,8 @@ export default {
         align-items: center;
         justify-content: center;
 
-        .left {}
+        .left {
+        }
 
         .middle {
             flex: 1;
@@ -125,7 +107,9 @@ export default {
             align-items: center;
             justify-content: center;
         }
-        .right {}
+
+        .right {
+        }
     }
 
     .north-modal-content {

@@ -39,7 +39,7 @@ export default {
     width : 100vw;
     height : 100vh;
     box-sizing: border-box;
-    overflow : hidden auto;
+    overflow : hidden;
     font-size : 20px;
     color : #2c3e50;
     background-color : #f5f5f5;

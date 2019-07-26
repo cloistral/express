@@ -10,15 +10,16 @@ router.use(function (err, req, res, next) {
     if (err.name === 'UnauthorizedError') {   
       res.status(401).send('无效的token invalid token...');
     }
+    next()
 });
 
 var indexCon = require('../app/controller/index/index')
-router.get('/',indexCon.index)
 
+router.get('/',indexCon.index)
 var userCon = require('../app/controller/user/user')
 router.post('/getUserInfo', userCon.getUserInfo);
-router.get('/getCurrentUser', userCon.getCurrentUser);
-
+router.post('/editUser',userCon.editUser)
+router.delete('/deleteUser',userCon.deleteUser)
 var loginCon = require('../app/controller/user/login')
 router.post('/login', loginCon);
 

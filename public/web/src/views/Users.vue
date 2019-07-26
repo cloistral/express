@@ -9,15 +9,18 @@
                          @pulling-up="onPullingUp">
                 <div class="list-container">
                     <div class="section"
+                         @click="userClick(item)"
                          v-for="(item,index) in usersList"
                          :key="index">
                         <div v-text="'用户名:' + item.username"
-                              class="test"></div>
+                             class="test"></div>
                         <div v-text="'密码:' + item.password"></div>
-                        <div v-text="'生日:' + item.birthdaty"></div>
+                        <div v-text="'生日:' + item.birthday"></div>
+                        <div v-if="item.address" v-text="'地址:' + item.address"></div>
                     </div>
                 </div>
             </cube-scroll>
+            <north-child-view />
         </div>
     </div>
 </template>
@@ -28,9 +31,9 @@ export default {
     data() {
         return {
             usersList: [],
-            param : {
-                pageSize : 0,
-                pageCount : 5
+            param: {
+                pageSize: 0,
+                pageCount: 10000
             }
         }
     },
@@ -40,8 +43,16 @@ export default {
     computed: {
         options() {
             return {
-                pullDownRefresh: true,
-                pullUpLoad: true,
+                pullDownRefresh: {
+                    threshold: 60,
+                    stop: 40,
+                    txt: '更新成功'
+                },
+                pullUpLoad: {
+                    threshold: 60,
+                    stop: 40,
+                    txt: '加载中'
+                },
                 scrollbar: true
             }
         },
@@ -50,11 +61,11 @@ export default {
         init(page) {
             this.param.pageSize = page || this.param.pageSize
             this.$http
-            .post('/api/getUserInfo',this.param)
-            .then((res) => {
-                this.param.pageSize++
-                this.usersList = this.usersList.concat(res.data.list) 
-            })
+                .post('/api/getUserInfo', this.param)
+                .then((res) => {
+                    this.param.pageSize++
+                    this.usersList = this.usersList.concat(res.data.list)
+                })
         },
         onPullingDown() {
             this.init()
@@ -62,17 +73,21 @@ export default {
         onPullingUp() {
             this.init()
         },
+        userClick(item) {
+            this.$router.forward({ path: '/user/editUser', query: { options: JSON.stringify(item) } }, 'child')
+        }
     }
 }
 </script>
 
 <style lang="stylus">
 .scroll-list-wrap {
-    width 100%;
-    height : calc(100% - 44Px);
-    position absolute;
-    top :  44px;
+    width: 100%;
+    height: calc(100% - 44Px);
+    position: absolute;
+    top: 44px;
 }
+
 .list-container {
     width: 95%;
     margin: auto;
@@ -84,10 +99,11 @@ export default {
         width: 100%;
         margin: 10px 0;
         display: flex;
-        flex-direction column;
+        flex-direction: column;
         justify-content: space-between;
+
         div {
-            margin : 10px 0
+            margin: 10px 0;
         }
     }
 }

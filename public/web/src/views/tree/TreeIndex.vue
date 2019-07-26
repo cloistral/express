@@ -3,17 +3,13 @@
     <north-header title="测试" style="background-color:transparent">
       <div slot="right" @click="$router.forward({path:'/treeIndex/treeChild'},'child')">添加</div>
     </north-header>
-    <tree-child-view />
+    <north-child-view/>
   </div>
 </template>
 
 <script>
-import TreeChildView from '@/components/NorthChildView'
-export default {
-	components: {
-		'tree-child-view': TreeChildView
-	}
-}
+
+export default {}
 </script>
 
 <style lang="stylus" scoped>
