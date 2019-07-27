@@ -16,6 +16,8 @@ import Modal from './services/modal/Modal'
 import createAPI from './services/create/index'
 createAPI(Vue, Modal, ['click'], false)
 
+import util from './util/util'
+Vue.prototype.$util = util
 
 Vue.config.productionTip = false
 new Vue({

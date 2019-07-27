@@ -4,7 +4,7 @@
             <cube-button class="button"
                          @click="btnClick(1)">1</cube-button>
             <cube-button class="button"
-                         @click="$router.forward({ path: '/login' })">Button</cube-button>
+                         @click="$router.forward({ path: '/game' })">Button</cube-button>
         </div>
     </div>
 </template>
@@ -30,11 +30,11 @@ export default {
         }
     },
     mounted() {
+        console.log(this.$router)
         this.modal1 = this.$createModal({
             title: '111',
             component: Test,
         })
-
         this.$nextTick(() => {
             anime({
                 targets: this.$refs.textRefs,

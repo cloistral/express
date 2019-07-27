@@ -23,9 +23,6 @@ export default {
                 this.$router.method = null
                 clearTimeout(time)
             },5)
-            // const toDepth = to.path
-            // const fromDepth = from.path
-            // this.transitionName = toDepth < fromDepth?'slide-right':'slide-left'
         }
     }
 }

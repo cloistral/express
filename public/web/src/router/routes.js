@@ -6,6 +6,7 @@ import TreeChild from '@/views/tree/TreeChild'
 import TreeSecond from '@/views/tree/TreeSecond'
 import Mine from "@/views/Mine"
 import Login from '@/views/Login'
+import Game from '@/views/Game'
 const routes = [
     { path: '/a', redirect: '/index' },
     { path: '/index', component: Index, },
@@ -35,6 +36,7 @@ const routes = [
             }
         ]
     },
-    { path: '/mine', component: Mine }
+    { path: '/mine', component: Mine },
+    { path: '/game', component: Game },
 ]
 export default routes;
