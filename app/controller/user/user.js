@@ -6,13 +6,6 @@ module.exports = {
         var format = res.app.get("format");
         let pageSize = req.body.pageSize || 0
         let pageCount = req.body.pageCount || 10
-
-        Story.findOne({ title: 'north_1' })
-            .populate('author')
-            .exec(function (err, story) {
-                console.log('什么',err, story)
-            })
-
         User.estimatedDocumentCount((e, count) => {
             if (e) return;
             User.find()
@@ -20,11 +13,25 @@ module.exports = {
                 .limit(pageCount)
                 .exec((err, data) => {
                     if (err) return;
+                    let list = []
+                    console.log(data, typeof data, data.constructor)
+                    if (typeof data == 'object' && data.constructor == Array) {
+                        data.forEach((item, index) => {
+                            let param = {
+                                id: item._id,
+                                username: item.username,
+                                password: item.password,
+                                address: item.address,
+                                birthday: item.birthday
+                            }
+                            list.push(param)
+                        })
+                    }
                     let formatData = {
                         pageCount: pageCount,
                         pageSize: pageSize,
                         allCount: count,
-                        list: data || []
+                        list: list || []
                     }
                     format.success(res, 200, formatData);
                 })
@@ -36,17 +43,24 @@ module.exports = {
         var format = res.app.get("format");
         let address = req.body.address
         let birthday = req.body.birthday
+        let phone = req.body.phone
+        console.log(phone)
         let id = req.body.id
         if (!id) {
             return format.success(res, 500, 'id必须传')
         }
-        User.updateOne(
-            { _id: id },
-            { $set: { address: address, birthday: birthday } },
+        User.findByIdAndUpdate(id,
+            { $set: { address: address, birthday: birthday, phone: phone } },
             function (err, data) {
-                if (err) return
-                format.success(res, 200, {})
-            });
+
+                if (err) handleError(err);
+                if (data) {
+                    format.success(res, 200, data)
+                } else {
+                    format.success(res, 500, '更新出错了')
+                }
+            })
+
     },
     //删
     deleteUser(req, res) {

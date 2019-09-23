@@ -11,13 +11,22 @@ var UsersSchema = new mongoose.Schema({
             return [true, ''];
         }
     },
+    phone: {
+        type: String,
+        validate: {
+            validator: function (v) {
+                return /\d{3}-\d{3}-\d{4}/.test(v);
+            },
+            message: '{VALUE} is not a valid phone number!'
+        },       
+    },
     birthday: {
-        type  : String,
+        type: String,
     },
-    address : {
-        type : String,
+    address: {
+        type: String,
     },
-    stories: [{ type: mongoose.Schema.Types.ObjectId, ref: 'story' }],
+    // stories: [{ type: mongoose.Schema.Types.ObjectId, ref: 'story' }],
     meta: {
         createAt: {
             type: Date,
@@ -30,18 +39,18 @@ var UsersSchema = new mongoose.Schema({
     }
 })
 //每次执行都会调用,时间更新操作
-UsersSchema.pre('save', function(next) {
-    if(this.isNew) {
+UsersSchema.pre('save', function (next) {
+    if (this.isNew) {
         this.meta.createAt = this.meta.updateAt = Date.now();
-    }else {
+    } else {
         this.meta.updateAt = Date.now();
     }
 
     next();
 })
 UsersSchema.statics.getAllCount = async function () {
-    await this.model('user_info').estimatedDocumentCount((err,count) => {
-       return count
+    await this.model('user_info').estimatedDocumentCount((err, count) => {
+        return count
     })
 }
 

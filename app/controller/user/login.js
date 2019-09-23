@@ -15,28 +15,22 @@ module.exports = (req, res) => {
         })
     let createUser = function () {
         var user = new User({
-            
+
             username: req.body.username,
             password: req.body.password,
         })
-        user.save(function (error) {
-            if(error) {
-                return format.error(res,error.errors)
+        user.save(function (error, data) {
+            if (error) {
+                return format.error(res, error.errors)
             }
-            let title = 'north_1'
-            let story = new Story({
-                title : title,
-                author : user._id
-            })
-            story.save((err,d)  => {
-                console.log(d)
-            })
+            console.log(data)
             var authToken = jwt.sign({
                 username: req.body.username,
                 password: req.body.password,
+                uid: data._id
             }, config.secret, {
-                    expiresIn: config.expiresIn
-                });
+                expiresIn: config.expiresIn
+            });
 
             return format.success(res, 200, { token: authToken })
         })

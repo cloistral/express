@@ -15,8 +15,9 @@
                         <div v-text="'用户名:' + item.username"
                              class="test"></div>
                         <div v-text="'密码:' + item.password"></div>
-                        <div v-text="'生日:' + item.birthday"></div>
-                        <div v-if="item.address" v-text="'地址:' + item.address"></div>
+                        <div v-text="'生日:' + item.birthday ? item.birthday : '2019-09-08'"></div>
+                        <div v-if="item.address"
+                             v-text="'地址:' + item.address ? item.address: '吉林省蛟河市庆岭镇'"></div>
                     </div>
                 </div>
             </cube-scroll>
@@ -81,30 +82,23 @@ export default {
 </script>
 
 <style lang="stylus">
-.scroll-list-wrap {
-    width: 100%;
-    height: calc(100% - 44Px);
-    position: absolute;
-    top: 44px;
-}
-
-.list-container {
-    width: 95%;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    .section {
-        width: 100%;
-        margin: 10px 0;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-
-        div {
-            margin: 10px 0;
-        }
-    }
-}
+.scroll-list-wrap
+    width 100%
+    height calc(100% - 44Px)
+    position absolute
+    top 44px
+.list-container
+    width 95%
+    margin auto
+    display flex
+    flex-direction column
+    align-items center
+    .section
+        width 100%
+        margin 10px 0
+        display flex
+        flex-direction column
+        justify-content space-between
+        div
+            margin 10px 0
 </style>

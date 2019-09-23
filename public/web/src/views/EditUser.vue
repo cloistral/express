@@ -22,6 +22,12 @@
                         v-model="param.birthday"
                         placeholder="请选择生日"></cube-input>
         </div>
+        <div class="cell">
+            <span>手机</span>
+            <cube-input class="cube-input"
+                        v-model="param.phone"
+                        placeholder="请输入用户手机号"></cube-input>
+        </div>
         <cube-button class="button"
                      @click="submitHandler">确认</cube-button>
     </div>
@@ -35,7 +41,8 @@ export default {
         return {
             param: {
                 address: '',
-                birthday: ""
+                birthday: "",
+                phone: '',
             },
             datePicker: null,
         }
@@ -66,21 +73,28 @@ export default {
             this.datePicker.show()
         },
         submitHandler() {
-            let param = {
-                id: this.query._id,
-                address: this.param.address,
-                birthday: this.param.birthday
-            }
-            this.$http.post('/api/editUser', param)
+            this.param.id = this.query.id
+            this.$http.post('/api/editUser', this.param)
                 .then((res) => {
-                    console.log(res)
+                    this.$root.initToast({
+                        txt: '编辑成功',
+                        timeout: () => {
+                            this.$router.prev()
+                        }
+                    })
                 })
         },
         deleteUser() {
-            this.$http.delete('/api/deleteUser',{
-                data: { id: this.query._id }
-            }).then((res) => {
-                console.log(res)
+            this.$root.initDialog({
+                content: '确认删除该用户?',
+                confirm: () => {
+                    this.$http.delete('/api/deleteUser', {
+                        data: { id: this.query.id }
+                    }).then((res) => {
+                        this.$root.initToast('删除成功!')
+                    })
+                },
+
             })
         }
     },
@@ -89,16 +103,13 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.user-info {
-    width: 95%;
-    height: 50px;
-    margin: auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    div {
-        flex: 1;
-    }
-}
+.user-info
+    width 95%
+    height 50px
+    margin auto
+    display flex
+    align-items center
+    justify-content space-between
+    div
+        flex 1
 </style>

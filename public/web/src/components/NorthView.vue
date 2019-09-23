@@ -45,8 +45,8 @@ export default {
     font-size: $base-font-size;
 }
 
-.slide-left-enter-active { animation: left-in .5s}
-.slide-left-leave-active { animation: left-out .5s}
+.slide-left-enter-active { animation: left-in .4s}
+.slide-left-leave-active { animation: left-out .4s}
 
 @keyframes left-in {
   from {transform: translate3d(100%,0,0);opacity: 0;}
@@ -58,8 +58,8 @@ export default {
   to {transform: translate3d(-100%,0,0); opacity: 0;}
 }
 
-.slide-right-enter-active { animation: right-in .5s }
-.slide-right-leave-active { animation: right-out .5s}
+.slide-right-enter-active { animation: right-in .3s }
+.slide-right-leave-active { animation: right-out .3s}
 
 @keyframes  right-in{
   from {transform: translate3d(-100%,0,0);opacity: 0;}
