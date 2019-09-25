@@ -1,38 +1,45 @@
 var jwt = require("jsonwebtoken");
-var User = require('../../model/user.model')
-var Story = require('../../model/stoty.modal')
-module.exports = (req, res) => {
-    var format = res.app.get('format')
-    var config = res.app.get('config')
+var mongoose = require('mongoose')
 
-    User.find({ username: req.body.username })
-        .then(data => {
+var StoryModel = require('../../model/stoty.modal')
+var UserModel = require('../../model/user.model')
+var BaseController = require('../../controller/base')
+
+class LoginController extends BaseController {
+    constructor() {
+        super()
+        this.login = this.login.bind(this)
+    }
+    login(req, res) {
+        UserModel.find({ username: req.body.username }, (err, data) => {
+            if (err) return;
             if (data && data.length > 0) {
-                format.fail(res, 500, '当前用户名已经注册过了,请重新输入')
+                this.formatData({ res: res, code: 500, msg: '当前用户名已经注册过了,请重新输入' })
             } else {
-                createUser()
+                var user = new UserModel({
+                    _id: new mongoose.Types.ObjectId(),
+                    username: req.body.username,
+                    password: req.body.password,
+                })
+                user.save((error, data) => {
+                    if (error) {
+                        return this.formatData({ res: res, code: 500, data: error })
+                    }
+                    var authToken = jwt.sign({
+                        username: req.body.username,
+                        password: req.body.password,
+                        uid: data._id
+                    }, this.config.secret, {
+                        expiresIn: this.config.expiresIn
+                    });
+                    return this.formatData({ res: res, code: 200, data: { token: authToken } })
+                })
             }
-        })
-    let createUser = function () {
-        var user = new User({
-
-            username: req.body.username,
-            password: req.body.password,
-        })
-        user.save(function (error, data) {
-            if (error) {
-                return format.error(res, error.errors)
-            }
-            console.log(data)
-            var authToken = jwt.sign({
-                username: req.body.username,
-                password: req.body.password,
-                uid: data._id
-            }, config.secret, {
-                expiresIn: config.expiresIn
-            });
-
-            return format.success(res, 200, { token: authToken })
         })
     }
 }
+
+module.exports = new LoginController();
+
+
+

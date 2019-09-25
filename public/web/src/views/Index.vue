@@ -54,7 +54,7 @@ export default {
         })
     },
     destroy() {
-        // this.modal1.remove()
+      
     },
     methods: {
         btnClick(par) {
@@ -65,19 +65,17 @@ export default {
 </script>
 
 <style lang="stylus">
-.index-bg {
-    background-size: cover;
-    background-position: center center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    .center-text {
-        width: 60vw;
-        height: 60vh;
-        font-weight: bold;
-        line-height: 1rem;
-        color: #000000;
-    }
-}
+.index-bg
+    background-size cover
+    background-position center center
+    display flex
+    flex-direction column
+    justify-content center
+    align-items center
+    .center-text
+        width 60vw
+        height 60vh
+        font-weight bold
+        line-height 1rem
+        color #000000
 </style>

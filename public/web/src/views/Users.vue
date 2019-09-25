@@ -40,6 +40,18 @@ export default {
     },
     mounted() {
         this.init()
+        this.$http.get('/api/readFile', {
+            responseType: 'blob'
+        }).then(res => {
+            console.log(111, '下载数据') ;
+            let url = window.URL.createObjectURL(new Blob([res]))
+            let link = document.createElement('a')
+            link.style.display = 'none'
+            link.href = url
+            link.setAttribute('download', 'excel.zip')
+            document.body.appendChild(link)
+            link.click()
+        })
     },
     computed: {
         options() {
@@ -75,7 +87,11 @@ export default {
             this.init()
         },
         userClick(item) {
-            this.$router.forward({ path: '/user/editUser', query: { options: JSON.stringify(item) } }, 'child')
+            this.$router.forward({ path: '/user/editUser', query: { options: JSON.stringify(item) } })
+        },
+        addChildren(item) {
+
+            this.$router.forward({ path: '/user/addUserChild', query: { id: item.id } })
         }
     }
 }

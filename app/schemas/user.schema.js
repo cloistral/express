@@ -1,5 +1,8 @@
 var mongoose = require("mongoose");
+var Schema = mongoose.Schema;
+var UserChildrenSchema = require('./user.childschema')
 var UsersSchema = new mongoose.Schema({
+    _id: Schema.Types.ObjectId,
     username: {
         type: String,
         required: [true, ''],
@@ -11,22 +14,11 @@ var UsersSchema = new mongoose.Schema({
             return [true, ''];
         }
     },
-    phone: {
-        type: String,
-        validate: {
-            validator: function (v) {
-                return /\d{3}-\d{3}-\d{4}/.test(v);
-            },
-            message: '{VALUE} is not a valid phone number!'
-        },       
-    },
-    birthday: {
-        type: String,
-    },
-    address: {
-        type: String,
-    },
-    // stories: [{ type: mongoose.Schema.Types.ObjectId, ref: 'story' }],
+    phone: { type: String, },
+    birthday: { type: String, },
+    address: { type: String, },
+    children : [UserChildrenSchema],
+    stories: [{ type: Schema.Types.ObjectId, ref: 'story' }],
     meta: {
         createAt: {
             type: Date,
@@ -36,7 +28,8 @@ var UsersSchema = new mongoose.Schema({
             type: Date,
             default: Date.now()
         }
-    }
+    },
+
 })
 //每次执行都会调用,时间更新操作
 UsersSchema.pre('save', function (next) {
@@ -48,10 +41,4 @@ UsersSchema.pre('save', function (next) {
 
     next();
 })
-UsersSchema.statics.getAllCount = async function () {
-    await this.model('user_info').estimatedDocumentCount((err, count) => {
-        return count
-    })
-}
-
 module.exports = UsersSchema

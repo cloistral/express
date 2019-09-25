@@ -30,6 +30,7 @@
         </div>
         <cube-button class="button"
                      @click="submitHandler">确认</cube-button>
+       
     </div>
 </template>
 
@@ -96,7 +97,7 @@ export default {
                 },
 
             })
-        }
+        },
     },
     destroy() { }
 }
