@@ -16,7 +16,7 @@ router.use(function (err, req, res, next) {
 });
 
 var indexCon = require('../app/controller/index/index')
-
+  
 router.get('/', indexCon.index)
 var userCon = require('../app/controller/user/user')
 router.post('/getUserInfo', userCon.getUserInfo);
