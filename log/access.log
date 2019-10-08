@@ -1,0 +1,16 @@
+::ffff:127.0.0.1 - POST /api/getUserInfo HTTP/1.1 200 4121 - 205.259 ms
+::ffff:127.0.0.1 - POST /api/getUserInfo HTTP/1.1 200 97 - 42.633 ms
+::ffff:127.0.0.1 - POST /api/getUserInfo HTTP/1.1 200 97 - 3.830 ms
+::ffff:127.0.0.1 - POST /api/getUserInfo HTTP/1.1 200 97 - 6.889 ms
+::ffff:127.0.0.1 - POST /api/getUserInfo HTTP/1.1 200 4121 - 55.158 ms
+::1 - GET /common HTTP/1.1 404 145 - 4.739 ms
+::ffff:127.0.0.1 - POST /api/getUserInfo HTTP/1.1 200 4121 - 280.114 ms
+::1 - GET /echo HTTP/1.1 404 143 - 0.359 ms
+::ffff:127.0.0.1 - POST /api/getUserInfo HTTP/1.1 200 4121 - 53.495 ms
+::1 - GET /echo HTTP/1.1 404 143 - 0.340 ms
+::ffff:127.0.0.1 - POST /api/getUserInfo HTTP/1.1 200 4121 - 38.628 ms
+::1 - GET /api/echo HTTP/1.1 401 31 - 0.691 ms
+::ffff:127.0.0.1 - POST /api/getUserInfo HTTP/1.1 200 4121 - 56.110 ms
+::1 - GET /api/echo HTTP/1.1 401 31 - 0.414 ms
+::ffff:127.0.0.1 - POST /api/getUserInfo HTTP/1.1 200 4121 - 38.917 ms
+::ffff:127.0.0.1 - POST /api/getUserInfo HTTP/1.1 200 4121 - 43.263 ms

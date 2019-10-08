@@ -30,7 +30,6 @@ export default {
         }
     },
     mounted() {
-        console.log(this.$router)
         this.modal1 = this.$createModal({
             title: '111',
             component: Test,

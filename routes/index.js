@@ -4,8 +4,9 @@ var config = require('../config/config')
 var router = express.Router();
 
 //配置JST
-router.use(expressJwt({ secret: config.secret }).unless({ 
-    path: ["/api/login", '/index.html','/api/readFile'] }));
+router.use(expressJwt({ secret: config.secret }).unless({
+    path: ["/api/login", '/index.html', '/api/readFile']
+}));
 
 router.use(function (err, req, res, next) {
     if (err.name === 'UnauthorizedError') {

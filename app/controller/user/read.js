@@ -17,12 +17,9 @@ class ReadController extends baseController {
         //     filestream.on('data', function (chunk) { })
         //     filestream.pipe(res);
         // })
-      
     }
 }
-
 module.exports = new ReadController()
-
 // var options = {
 //     root: __dirname + '../../../../public/',
 //     dotfiles: 'allow',
