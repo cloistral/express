@@ -39,6 +39,7 @@ export default {
         }
     },
     mounted() {
+        
         this.init()
     },
     computed: {
@@ -59,7 +60,7 @@ export default {
         },
     },
     methods: {
-
+       
         downloadFile() {
             this.$http.get('/api/readFile', {
                 responseType: 'blob'

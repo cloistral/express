@@ -15,20 +15,11 @@ router.use(function (err, req, res, next) {
     next()
 });
 
-var indexCon = require('../app/controller/index/index')
-  
-router.get('/', indexCon.index)
-var userCon = require('../app/controller/user/user')
-router.post('/getUserInfo', userCon.getUserInfo);
-router.post('/editUser', userCon.editUser)
-router.delete('/deleteUser', userCon.deleteUser)
-var login = require('../app/controller/user/login')
-router.post('/login', login.login);
+router.post('/login', require('../app/controller/user/login').login);
+router.post('/getUserInfo', require('../app/controller/user/user').getUserInfo);
+router.post('/editUser', require('../app/controller/user/user').editUser)
+router.delete('/deleteUser', require('../app/controller/user/user').deleteUser)
+router.get('/readFile', require('../app/controller/user/read').readFile)
 
-var story = require('../app/controller/story/story')
-router.post('/getStoryList', story.getStoryList)
-
-var read = require('../app/controller/user/read')
-router.get('/readFile', read.readFile)
 
 module.exports = router;
