@@ -5,8 +5,8 @@
                  @click="deleteUser">删除</div>
         </north-header>
         <div class="user-info">
-            <div v-text="'用户名: ' + query.username"></div>
-            <div v-text="'密码: ' + query.password"></div>
+            <div v-text="'用户名: ' + param.username"></div>
+            <div v-text="'密码: ' + param.password"></div>
         </div>
         <div class="cell">
             <span>地址</span>
@@ -30,34 +30,40 @@
         </div>
         <cube-button class="button"
                      @click="submitHandler">确认</cube-button>
-       
+
     </div>
 </template>
 
 <script>
+
 export default {
     name: 'Test',
     props: ['options'],
     data() {
         return {
             param: {
+                username: '',
+                password: '',
                 address: '',
-                birthday: "",
-                phone: '',
+                birthday: '',
+                phone: ''
             },
             datePicker: null,
         }
     },
-    computed: {
-        query() {
-            let type = typeof this.options
-            let options
-            if (type == 'string') return options = JSON.parse(this.options)
-            else return {}
-        }
+    mounted() {
+        this.init()
     },
-    mounted() { },
     methods: {
+        init() {
+            this.$http.get('/api/getUserDetail', {
+                params: {
+                    id: this.$route.query.id
+                }
+            }).then((res) => {
+                this.param = res.data
+            })
+        },
         showDatePicker() {
             if (!this.datePicker) {
                 this.datePicker = this.$createDatePicker({
@@ -74,7 +80,6 @@ export default {
             this.datePicker.show()
         },
         submitHandler() {
-            this.param.id = this.query.id
             this.$http.post('/api/editUser', this.param)
                 .then((res) => {
                     this.$root.initToast({

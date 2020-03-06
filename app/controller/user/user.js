@@ -7,6 +7,7 @@ class UserController extends BaseController {
         this.getUserInfo = this.getUserInfo.bind(this)
         this.editUser = this.editUser.bind(this)
         this.deleteUser = this.deleteUser.bind(this)
+        this.getUserDetail = this.getUserDetail.bind(this)
     }
     //查
     getUserInfo(req, res) {
@@ -50,9 +51,9 @@ class UserController extends BaseController {
         let address = req.body.address
         let birthday = req.body.birthday
         let phone = req.body.phone
-        let id = req.body.id
+        let id = req.body._id
         if (!id) {
-            return format.success(res, 500, 'id必须传')
+            return this.formatData.success(res, 500, 'id必须传')
         }
         User.findByIdAndUpdate(id,
             { $set: { address: address, birthday: birthday, phone: phone } },
@@ -68,6 +69,13 @@ class UserController extends BaseController {
     //删
     deleteUser(req, res) {
         User.findOneAndRemove({ _id: req.body.id }, (err, data) => {
+            if (err) return
+            this.formatData({ res: res, data: data });
+        })
+    }
+    getUserDetail(req, res) {
+        
+        User.findOne({ _id: req.query.id }, (err, data) => {
             if (err) return
             this.formatData({ res: res, data: data });
         })

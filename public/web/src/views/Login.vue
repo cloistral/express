@@ -12,11 +12,14 @@
                         v-model="param.password"
                         placeholder="请输入密码"></cube-input>
         </div>
-        <div class="cell">
-            <span>故事</span>
+        <div class="cell"
+             @click="selectStatus">
+            <span>状态</span>
             <cube-input class="cube-input"
-                        v-model="param.storyName"
-                        placeholder="请输入密码"></cube-input>
+                        readonly
+                        type="text"
+                        v-model="param.statusText"
+                        placeholder="请选择状态"></cube-input>
         </div>
         <cube-button class="button"
                      @click="submit">确认</cube-button>
@@ -24,19 +27,40 @@
 </template>
 
 <script>
+
 export default {
     data() {
         return {
             param: {
                 username: '',
                 password: '123456',
-                storyName : '',
-            }
+                status: '',
+                statusText: ''
+            },
+            statusPicker: null
         }
     },
     mounted() { },
-    destroy() { },
     methods: {
+        selectStatus() {
+            if (!this.statusPicker) {
+                this.statusPicker = this.$createPicker({
+                    title: '选择状态',
+                    data: [
+                        [
+                            { text: '在职', value: '1' },
+                            { text: '离职', value: '2' },
+                            { text: '无业', value: '3' }
+                        ]
+                    ],
+                    onSelect: (selectedVal, selectedIndex, selectedText) => {
+                        this.param.status = selectedVal[0]
+                        this.param.statusText = selectedText[0]
+                    },
+                })
+            }
+            this.statusPicker.show()
+        },
         submit() {
             this.$http.post('/api/login', this.param).then((res) => {
                 if (res.code == 200) {

@@ -39,7 +39,7 @@ export default {
         }
     },
     mounted() {
-        
+
         this.init()
     },
     computed: {
@@ -60,7 +60,7 @@ export default {
         },
     },
     methods: {
-       
+
         downloadFile() {
             this.$http.get('/api/readFile', {
                 responseType: 'blob'
@@ -91,7 +91,8 @@ export default {
             this.init()
         },
         userClick(item) {
-            this.$router.forward({ path: '/user/editUser', query: { options: JSON.stringify(item) } })
+            console.log(item)
+            this.$router.forward({ path: '/user/editUser', query: { id: item.id } })
         },
         addChildren(item) {
 

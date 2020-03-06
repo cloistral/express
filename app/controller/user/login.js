@@ -16,14 +16,15 @@ class LoginController extends BaseController {
             if (data && data.length > 0) {
                 this.formatData({ res: res, code: 500, msg: '当前用户名已经注册过了,请重新输入' })
             } else {
-                var user = new UserModel({
+                let user = new UserModel({
                     _id: new mongoose.Types.ObjectId(),
                     username: req.body.username,
                     password: req.body.password,
+                    status: req.body.status
                 })
                 user.save((error, data) => {
                     if (error) {
-                        return this.formatData({ res: res, code: 500, data: error })
+                        return this.formatData({ res: res, code: 500, data: error.message })
                     }
                     var authToken = jwt.sign({
                         username: req.body.username,

@@ -39,7 +39,7 @@ export default {
 }
 
 .slide-enter-active {
-	animation: top-in 0.4s;
+	animation: top-in 0.2s;
 }
 .slide-leave-active {
 	animation: top-out 0.4s;

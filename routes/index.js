@@ -17,6 +17,7 @@ router.use(function (err, req, res, next) {
 
 router.post('/login', require('../app/controller/user/login').login);
 router.post('/getUserInfo', require('../app/controller/user/user').getUserInfo);
+router.get('/getUserDetail', require('../app/controller/user/user').getUserDetail)
 router.post('/editUser', require('../app/controller/user/user').editUser)
 router.delete('/deleteUser', require('../app/controller/user/user').deleteUser)
 router.get('/readFile', require('../app/controller/user/read').readFile)

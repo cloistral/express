@@ -7,8 +7,12 @@ import http from './lib/http'
 Vue.use(http)
 import NorthHeader from '@/components/NorthHeader'
 Vue.component('north-header', NorthHeader)
+import NorthView from '@/components/NorthView'
+Vue.component('north-view', NorthView)
+
 import NorthChildView from '@/components/NorthChildView'
 Vue.component('north-child-view', NorthChildView)
+
 import { DatePicker } from 'cube-ui'
 Vue.use(DatePicker)
 

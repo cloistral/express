@@ -1,7 +1,6 @@
-var mongoose = require("mongoose");
-var Schema = mongoose.Schema;
-var UserChildrenSchema = require('./user.childschema')
-var UsersSchema = new mongoose.Schema({
+let mongoose = require("mongoose");
+let Schema = mongoose.Schema;
+let UsersSchema = new mongoose.Schema({
     _id: Schema.Types.ObjectId,
     username: {
         type: String,
@@ -14,11 +13,21 @@ var UsersSchema = new mongoose.Schema({
             return [true, ''];
         }
     },
-    phone: { type: String, },
+    status: {
+        // 状态
+        type: String
+    },
+    phone: {
+        type: String,
+        validate: {
+            validator: function (v) {
+                return /^[1][0-9]{10}$/.test(v);
+            },
+            message: '手机号 - {VALUE} - 不符合验证规则!'
+        },
+    },
     birthday: { type: String, },
     address: { type: String, },
-    children : [UserChildrenSchema],
-    stories: [{ type: Schema.Types.ObjectId, ref: 'story' }],
     meta: {
         createAt: {
             type: Date,
@@ -31,14 +40,5 @@ var UsersSchema = new mongoose.Schema({
     },
 
 })
-//每次执行都会调用,时间更新操作
-UsersSchema.pre('save', function (next) {
-    if (this.isNew) {
-        this.meta.createAt = this.meta.updateAt = Date.now();
-    } else {
-        this.meta.updateAt = Date.now();
-    }
 
-    next();
-})
 module.exports = UsersSchema
