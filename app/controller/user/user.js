@@ -9,6 +9,11 @@ class UserController extends BaseController {
         this.deleteUser = this.deleteUser.bind(this)
         this.getUserDetail = this.getUserDetail.bind(this)
     }
+
+    change = () => {
+       
+    }
+
     //查
     getUserInfo(req, res) {
         let pageSize = req.body.pageSize || 0
@@ -74,7 +79,7 @@ class UserController extends BaseController {
         })
     }
     getUserDetail(req, res) {
-        
+
         User.findOne({ _id: req.query.id }, (err, data) => {
             if (err) return
             this.formatData({ res: res, data: data });

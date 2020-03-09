@@ -1,5 +1,12 @@
 <template>
-    <div class="bg">
+    <north-scroll class="horizontal-scroll-list-wrap">
+        <ul class="list-wrapper">
+            <li v-for="item in 100"
+                :key="item"
+                class="list-item">{{ item }}</li>
+        </ul>
+    </north-scroll>
+    <!-- <div class="bg">
         <div class="cell">
             <span>用户名</span>
             <cube-input v-model="param.username"
@@ -23,10 +30,12 @@
         </div>
         <cube-button class="button"
                      @click="submit">确认</cube-button>
-    </div>
+    </div> -->
 </template>
 
 <script>
+
+import Scroll from '../components/scroll/index'
 
 export default {
     data() {
@@ -37,8 +46,11 @@ export default {
                 status: '',
                 statusText: ''
             },
-            statusPicker: null
+            statusPicker: null,
         }
+    },
+    components: {
+        'north-scroll': Scroll
     },
     mounted() { },
     methods: {
@@ -101,4 +113,5 @@ export default {
     margin 20px auto
     background-color $color-black
     border-radius 10px
+
 </style>

@@ -1,7 +1,6 @@
 var jwt = require("jsonwebtoken");
 var mongoose = require('mongoose')
 
-var StoryModel = require('../../model/stoty.modal')
 var UserModel = require('../../model/user.model')
 var BaseController = require('../../controller/base')
 

@@ -7,7 +7,6 @@ UsersSchema.pre('save', function (next) {
     } else {
         this.meta.updateAt = Date.now();
     }
-
     next();
 })
 var User = mongoose.model("user", UsersSchema);
