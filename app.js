@@ -13,4 +13,12 @@ app.get('/index.html', (req, res) => {
     res.sendFile(__dirname + "/public/" + "index.html");
 })
 
+
+var mysql = require('./lib/mysql.db')
+mysql.query('SELECT * from user_info', (err, data) => {
+    console.log(1111, err, data)
+})
+
+
+
 module.exports = app;

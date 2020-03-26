@@ -33,31 +33,31 @@ export default {
         }
     }),
 
-    mounted () {
-        console.log(this.forceUpdate())
+    mounted() {
+
     },
 
     methods: {
         onPullDown() {
-            console.log('pull-down')
+            setTimeout(() => {
+                this.$refs.scrollRef.forceUpdate()
+            }, 1000);
         },
         onPullup() {
             console.log('pull-up')
         }
     },
-    render() {
-        const props = this.$props || {}
-        // Object.keys(Scroll.props).forEach(key => {
-        //     props[key] = Object.assign({},Scroll[key])
-        // })
-        
+    render(createElement) {
+        const props = Object.assign({}, this.$props)
+
         const scroll = (
-            <Scroll {...{ props, scopedSlots: { ...this.$scopedSlots } }}
+            <Scroll ref="scrollRef" {...{ props, scopedSlots: { ...this.$scopedSlots } }}
                 onPulling-down={this.onPullDown}
                 onPulling-up={this.onPullup}>
                 {Object.keys(this.$slots).map(name => (<template slot={name}>{this.$slots[name]}</template>))}
             </Scroll>
         )
+
         return (
             <div>
                 {scroll}

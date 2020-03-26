@@ -14,8 +14,6 @@ let initToast = (text) => {
     toast.show()
 }
 
-
-
 const Axios = axios.create({ timeout: 10000 })
 Axios.interceptors.request.use(config => {
     if (localStorage.token) {
