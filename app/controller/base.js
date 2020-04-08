@@ -21,6 +21,5 @@ class BaseController {
         let data = param.data || {}
         response.status(code).send({ code: code, msg: msg, data: data })
     }
-    
 }
 module.exports = BaseController.getInstance()

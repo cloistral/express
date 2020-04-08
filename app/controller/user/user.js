@@ -10,10 +10,6 @@ class UserController extends BaseController {
         this.getUserDetail = this.getUserDetail.bind(this)
     }
 
-    change = () => {
-       
-    }
-
     //查
     getUserInfo(req, res) {
         let pageSize = req.body.pageSize || 0
